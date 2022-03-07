@@ -1,0 +1,2 @@
+C:\WebAPI\USI_Project\obj\Debug\USI_Project.csproj.AssemblyReference.cache
+C:\WebAPI\USI_Project\obj\Debug\USI_Project.csproj.CoreCompileInputs.cache
