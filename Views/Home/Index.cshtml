@@ -1,41 +1,352 @@
-﻿@model USI_Project.Models.LoginModel
-@{
-    ViewBag.Title = "Index";
-}
-<script language="javascript">
+<!DOCTYPE html>
+<html>
 
-    function display() {
-        if ($("#txtUserName").attr("value") == "")
-        {
-            alert("Please Enter your UserName.");
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>JS Bin</title>
+</head>
+
+<body>
+    <div class="page-container">
+        <div class="">
+            <div class="row">
+                <div class="col-12 ml-3 heading-container text-center">
+                    <h1 class="heading mt-2">Universal Software Inventory</h1>
+                </div>
+                <div class="d-flex flex-row items-container col-12">
+                    <ul class="nav buttons-container d-flex flex-column justify-content-start">
+                        <button class="shadow nav-item nav-link active selectedTab" id="searchImageVersion" onclick="imageSectionTab()" aria-current="page">
+                            Search image version
+                        </button>
+
+                        <button class="nav-item nav-link shadow" id="compareBuilds" onclick="compareBuildsSectionTab()">
+                            Compare Builds
+                        </button>
+
+                        <button class="nav-item nav-link shadow" id="showReleaseNotes" onclick="showReleaseNotesTab()">
+                            Show Release Notes
+                        </button>
+
+                        <button class="nav-item nav-link shadow" id="reports" onclick="reportsSectionTab()">
+                            Reports
+                        </button>
+
+                        <button class="nav-item nav-link shadow" id="syncData" onclick="syncDataTab()">
+                            Sync Data
+                        </button>
+                    </ul>
+
+                    <div class="tabs-container col-10">
+                        <div class="m-5" id="imageSection">
+                            <label for="imageInput" style="font-weight: bold;">Image Version:</label>
+                            <input class="shadow" type="search" name="name" placeholder="Enter Image Version(YYYY.MM.DD) and Hit Enter" id="imageInput" style="border-radius:6px; border-left: 10px solid #0d2436; width: 340px" onblur="validateDateFormat()" />
+
+                            <div class="d-none" id="spinner">
+                                <div class="d-flex justify-content-center">
+                                    <div class="spinner-border" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="search-results" id="searchResults"></div>
+                        </div>
+
+                        <div class="" id="compareBuildsSection">
+                            <p class="tab-content">compareBuilds</p>
+                        </div>
+
+                        <div class="" id="releaseNotesSection">
+                            <p class="tab-content">Release Notes</p>
+                        </div>
+
+                        <div class="" id="reportsSection">
+                            <p class="tab-content">Reports</p>
+                        </div>
+
+                        <div class="" id="syncDataSection">
+                            <p class="tab-content">Sync data</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-footer">
+        </div>
+
+    </div>
+</body>
+
+</html>
+<script>
+    var searchImageVersionEl = document.getElementById("searchImageVersion");
+    var compareBuildsEl = document.getElementById("compareBuilds");
+    var showReleaseNotesEl = document.getElementById("showReleaseNotes");
+    var reportsEl = document.getElementById("reports");
+    var syncDataEl = document.getElementById("syncData");
+
+    var imageSectionEl = document.getElementById("imageSection");
+    var compareBuildsSectionEl = document.getElementById("compareBuildsSection");
+    var releaseNotesSectionEl = document.getElementById("releaseNotesSection");
+    var reportsSectionEl = document.getElementById("reportsSection");
+    var syncDataSectionEl = document.getElementById("syncDataSection");
+
+    var imageInputEl = document.getElementById("imageInput");
+    var spinnerEl = document.getElementById("spinner");
+    var searchResultsEl = document.getElementById("searchResults");
+    var onSubmitBtn = document.getElementById("onSubmit");
+
+    //date input validation:
+    function validateDateFormat() {
+        var regExp = /^[0-9. a-z A-Z]+$/;
+        if (!regExp.test(imageInputEl.value)) {
+            alert("Enter valid date format");
+            imageInput.style.border = "2px solid red";
             return false;
-        } else if ($("#txtPassword").attr("value") == "") {
-            alert("Please enter Password.");
-            return false;
+
         }
-        alert("Login Successfully");
-        return true;
+        imageInput.style.border = "2px solid green";
     }
+
+
+    //Creating Tabs
+    compareBuildsSectionEl.classList.add("d-none");
+    releaseNotesSectionEl.classList.add("d-none");
+    reportsSectionEl.classList.add("d-none");
+    syncDataSectionEl.classList.add("d-none");
+
+    function imageSectionTab() {
+        imageSectionEl.classList.remove("d-none");
+        compareBuildsSectionEl.classList.add("d-none");
+        releaseNotesSectionEl.classList.add("d-none");
+        reportsSectionEl.classList.add("d-none");
+        syncDataSectionEl.classList.add("d-none");
+
+        searchImageVersionEl.classList.add("selectedTab");
+        compareBuildsEl.classList.remove("selectedTab");
+        showReleaseNotesEl.classList.remove("selectedTab");
+        reportsEl.classList.remove("selectedTab");
+        syncDataEl.classList.remove("selectedTab");
+    }
+
+    function compareBuildsSectionTab() {
+        imageSectionEl.classList.add("d-none");
+        compareBuildsSectionEl.classList.remove("d-none");
+        releaseNotesSectionEl.classList.add("d-none");
+        reportsSectionEl.classList.add("d-none");
+        syncDataSectionEl.classList.add("d-none");
+
+        searchImageVersionEl.classList.remove("selectedTab");
+        compareBuildsEl.classList.add("selectedTab");
+        showReleaseNotesEl.classList.remove("selectedTab");
+        reportsEl.classList.remove("selectedTab");
+        syncDataEl.classList.remove("selectedTab");
+    }
+
+    function showReleaseNotesTab() {
+        imageSectionEl.classList.add("d-none");
+        compareBuildsSectionEl.classList.add("d-none");
+        releaseNotesSectionEl.classList.remove("d-none");
+        reportsSectionEl.classList.add("d-none");
+        syncDataSectionEl.classList.add("d-none");
+
+        searchImageVersionEl.classList.remove("selectedTab");
+        compareBuildsEl.classList.remove("selectedTab");
+        showReleaseNotesEl.classList.add("selectedTab");
+        reportsEl.classList.remove("selectedTab");
+        syncDataEl.classList.remove("selectedTab");
+    }
+
+    function reportsSectionTab() {
+        imageSectionEl.classList.add("d-none");
+        compareBuildsSectionEl.classList.add("d-none");
+        releaseNotesSectionEl.classList.add("d-none");
+        reportsSectionEl.classList.remove("d-none");
+        syncDataSectionEl.classList.add("d-none");
+
+        searchImageVersionEl.classList.remove("selectedTab");
+        compareBuildsEl.classList.remove("selectedTab");
+        showReleaseNotesEl.classList.remove("selectedTab");
+        reportsEl.classList.add("selectedTab");
+        syncDataEl.classList.remove("selectedTab");
+    }
+
+    function syncDataTab() {
+        imageSectionEl.classList.add("d-none");
+        compareBuildsSectionEl.classList.add("d-none");
+        releaseNotesSectionEl.classList.add("d-none");
+        reportsSectionEl.classList.add("d-none");
+        syncDataSectionEl.classList.remove("d-none");
+
+        searchImageVersionEl.classList.remove("selectedTab");
+        compareBuildsEl.classList.remove("selectedTab");
+        showReleaseNotesEl.classList.remove("selectedTab");
+        reportsEl.classList.remove("selectedTab");
+        syncDataEl.classList.add("selectedTab");
+    }
+
+
+    //Creating and Appending seach results to the results container
+    function createAndAppendSearchResult(result) {
+        let {
+            link,
+            title,
+            description
+        } = result;
+
+        let resultItemEl = document.createElement("li");
+        resultItemEl.textContent = title;
+        resultItemEl.classList.add("result-title");
+        resultItemEl.classList.add("result-item");
+
+        let titleBreakEl = document.createElement("br");
+        resultItemEl.appendChild(titleBreakEl);
+        searchResultsEl.appendChild(resultItemEl);
+    }
+
+    function displayResults(searchResults) {
+        spinnerEl.classList.add("d-none");
+
+        for (let result of searchResults) {
+            createAndAppendSearchResult(result);
+        }
+    }
+
+    function searchFiles(event) {
+        if (event.key === "Enter") {
+            if (imageInputEl.value === "") {
+                alert("Please Enter Date(YYYY.MM.DD)");
+            }
+
+            spinnerEl.classList.remove("d-none");
+            searchResultsEl.textContent = "";
+
+            let searchInput = imageInputEl.value;
+
+            let url = "https://apis.ccbp.in/wiki-search?search=" + searchInput;
+            // let url = "https://sheet2api.com/v1/B5BfzSPIQOCK/characters/" + searchInput;
+
+            let options = {
+                method: "GET"
+            };
+
+            fetch(url, options)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (jsonData) {
+                    let {
+                        search_results
+                    } = jsonData;
+                    displayResults(search_results);
+                });
+        }
+    }
+    imageInputEl.addEventListener("keydown", searchFiles);
 </script>
-<h3> Login Form </h3>
-@using (Html.BeginForm("Index", "Home"))
-{
-    <table width="40%" cellpadding="1" cellspacing="5">
-        <tr>
-            <td colspan="2" style="color:#f00;font-size:larger">@ViewBag.Status</td>
-        </tr>
-        <tr>
-            <td align="right">UserName :</td>
-            <td>@Html.TextBoxFor(m => m.UserName, new { @style = "width:200px", @id = "txtUserName" })</td>
-        </tr>
-        <tr>
-            <td align="right">Password :</td>
-            <td>@Html.PasswordFor(m => m.Password, new { @style = "width:200px", @id = "txtPassword" })</td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <input type="submit" value="Login" title="login" onclick=" display();" />
-            </td>
-        </tr>
-    </table>
-} 
+ 
+<style>
+   .page-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+   }
+
+  .heading-container {
+    background-color: #0d2436;
+    font-family: "Roboto";
+    font-size: 20px;
+    color: white;
+    padding: 20px;
+  }
+
+    .selectedTab {
+        background-color: white;
+    }
+  button {
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    border-radius: 8px;
+    border-bottom: 2px solid #0d2436;
+  }
+
+  .tabs-container {
+    padding: 20px;
+    background-color: #f6f8fa;
+    font-family: "Roboto";
+    font-size: 18px;
+    flex-grow: 1;
+    overflow-y: auto;
+
+  }
+
+  .tab-content {
+    color: #323f4b;
+    font-family: "Roboto";
+    font-size: 15px;
+  }
+
+ .heading {
+    font-family: "roboto";
+    font-size: 24px;
+ }
+
+ .buttons-container {
+    width: 150px;
+    padding: 20px;
+    background-color: #e8edf9;
+    font-family: "Roboto";
+    font-size: 20px;
+    flex-shrink: 0;
+ }
+
+  input {
+    height: 36px;
+  }
+
+ .result-url {
+    color: #006621;
+    text-decoration: none;
+ }
+
+ .result-item {
+    margin-bottom: 20px;
+ }
+
+.result-title {
+    font-size: 18px;
+}
+
+.link-description {
+    color: #444444;
+    font-size: 15px;
+}
+
+.search-results {
+    width: 100%;
+    padding-left: 20px;
+    overflow-y: auto;
+}
+
+.items-container {
+    flex-grow: 1;
+    overflow-y: auto;
+    display: flex;
+    margin-top: 5px;
+}
+
+.page-footer {
+    background-color: #0d2436;
+    font-family: "Roboto";
+    font-size: 20px;
+    color: white;
+    padding: 20px;
+}
+</style>
