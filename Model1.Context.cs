@@ -13,10 +13,10 @@ namespace USI_Project
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class EmployeeDBEntities : DbContext
+    public partial class EmployeeDBEntities1 : DbContext
     {
-        public EmployeeDBEntities()
-            : base("name=EmployeeDBEntities")
+        public EmployeeDBEntities1()
+            : base("name=EmployeeDBEntities1")
         {
         }
     
