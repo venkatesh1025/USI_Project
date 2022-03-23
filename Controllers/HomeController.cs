@@ -17,19 +17,19 @@ namespace USI_Project.Controllers
         }
 
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Login()
         {
             LoginModel obj = new LoginModel();
             return View();
         }
         [HttpPost]
-        public ActionResult Index(LoginModel objuserlogin)
+        public ActionResult Login(LoginModel objuserlogin)
         {
             //var display = Userloginvalues().Where(m => m.UserName == objuserlogin.UserName && m.Password == objuserlogin.Password).FirstOrDefault();
             var display =db.Userloginvalues.Where(m => m.Username == objuserlogin.UserName && m.Password == objuserlogin.Password).FirstOrDefault();
             if (display != null)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login", "Home");
             }
             else
             {
