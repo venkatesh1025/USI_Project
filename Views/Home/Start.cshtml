@@ -66,9 +66,13 @@
                     color: #f1f1f1;
                     border: 1px solid #f1f1f1;
                 }
+        .username_style
+        {
+            color:#000 !important;
+        }
     </style>
 </head>
-@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+@using (Html.BeginForm("Login", "Home", FormMethod.Post))
 {
     <div class="container">
         <h3 style="text-align:center"> User Login</h3>
@@ -79,7 +83,7 @@
                         <td> User Name :</td>
                         <td>
 
-                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-inline", @align = "center", @type = "user" } })
+                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-inline username_style", @align = "center", @type = "user", @autocomplete = "off" } })
                             @Html.ValidationMessageFor(model => model.UserName)
                         </td>
                     </tr>
@@ -88,7 +92,7 @@
                     <tr>
                         <td> Password:</td>
                         <td>
-                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-inline", @align = "center", @type = "password"} })
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-inline username_style", @align = "center", @type = "password", @autocomplete = "off" } })
                             @Html.ValidationMessageFor(model => model.Password)
                         </td>
                     </tr>
@@ -143,7 +147,7 @@
             alert('Thank You for Login & You are in USI Inventory');
   //Redirecting to other page or webste code or you can set your own html page.
             console.log("successRedirectToHomePage");
-       window.location = ".Index","Home";
+       window.location = ".Login","Home";
         }
          console.log("end");
 
@@ -155,6 +159,9 @@
 		document.getElementById("Password").value="";
 	}
 </script>
+
+
+
 
 
 
