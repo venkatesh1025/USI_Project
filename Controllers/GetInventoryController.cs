@@ -20,7 +20,7 @@ namespace USI_Project.Controllers
         public ActionResult Index(FormCollection form)
         {
             List<InventoryModel> Inventory = new List<InventoryModel>();
-            string fileName = "./2022-05-12/Inventory.xlsx";
+            string fileName = "./2022-05-12/inventory.xlsx";
             // For .net core, the next line requires the NuGet package, 
             // System.Text.Encoding.CodePages
             System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
