@@ -59,10 +59,6 @@ input {
   height: 36px;
 }
 
-.result-url {
-  color: #006621;
-  text-decoration: none;
-}
 
 .result-item {
   margin-bottom: 20px;
@@ -72,10 +68,6 @@ input {
   font-size: 18px;
 }
 
-.link-description {
-  color: #444444;
-  font-size: 15px;
-}
 
 .search-results {
   width: 100%;
