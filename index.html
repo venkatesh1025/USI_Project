@@ -1,137 +1,111 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
-      crossorigin="anonymous"
-    />
+<head>
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+          crossorigin="anonymous" />
     <link rel="stylesheet" type="text/css" href="styles.css" />
-    <script
-      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+            integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+            integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+            crossorigin="anonymous"></script>
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
+
     <title>JS Bin</title>
-  </head>
 
-  <body>
+</head>
+
+<body>
     <div class="page-container">
-      <div class="">
-        <div class="row">
-          <div class="col-12 ml-3 heading-container text-center">
-            <h1 class="heading mt-2">Universal Software Inventory</h1>
-          </div>
-          <div class="d-flex flex-row items-container col-12">
-            <ul
-              class="nav buttons-container d-flex flex-column justify-content-start"
-            >
-              <button
-                class="shadow nav-item nav-link active selectedTab"
-                id="searchImageVersion"
-                onclick="imageSectionTab()"
-                aria-current="page"
-              >
-                Search image version
-              </button>
-
-              <button
-                class="nav-item nav-link shadow"
-                id="compareBuilds"
-                onclick="compareBuildsSectionTab()"
-              >
-                Compare Builds
-              </button>
-
-              <button
-                class="nav-item nav-link shadow"
-                id="showReleaseNotes"
-                onclick="showReleaseNotesTab()"
-              >
-                Show Release Notes
-              </button>
-
-              <button
-                class="nav-item nav-link shadow"
-                id="reports"
-                onclick="reportsSectionTab()"
-              >
-                Reports
-              </button>
-
-              <button
-                class="nav-item nav-link shadow"
-                id="syncData"
-                onclick="syncDataTab()"
-              >
-                Sync Data
-              </button>
-            </ul>
-
-            <div class="tabs-container col-10">
-              <div class="m-5" id="imageSection">
-                <label for="imageInput" style="font-weight: bold"
-                  >Image Version:</label
-                >
-                <input
-                  class="shadow"
-                  type="search"
-                  name="name"
-                  placeholder="Enter Image Version(YYYY.MM.DD) and Hit Enter"
-                  id="imageInput"
-                  style="
-                    border-radius: 6px;
-                    border-left: 10px solid #0d2436;
-                    width: 340px;
-                  "
-                  onblur="validateDateFormat()"
-                />
-
-                <div class="d-none" id="spinner">
-                  <div class="d-flex justify-content-center">
-                    <div class="spinner-border" role="status">
-                      <span class="sr-only">Loading...</span>
-                    </div>
-                  </div>
+        <div class="">
+            <div class="row">
+                <div class="col-12 ml-3 heading-container text-center">
+                    <h1 class="heading mt-2">Universal Software Inventory</h1>
                 </div>
-                <div class="search-results" id="searchResults"></div>
-              </div>
+                <div class="d-flex flex-row items-container col-12">
+                    <ul class="nav buttons-container d-flex flex-column justify-content-start">
+                        <button class="shadow nav-item nav-link active selectedTab"
+                                id="searchImageVersion"
+                                onclick="imageSectionTab()"
+                                aria-current="page">
+                            Search image version
+                        </button>
 
-              <div class="" id="compareBuildsSection">
-                <p class="tab-content">compareBuilds</p>
-              </div>
+                        <button class="nav-item nav-link shadow"
+                                id="compareBuilds"
+                                onclick="compareBuildsSectionTab()">
+                            Compare Builds
+                        </button>
 
-              <div class="" id="releaseNotesSection">
-                <p class="tab-content">Release Notes</p>
-              </div>
+                        <button class="nav-item nav-link shadow"
+                                id="showReleaseNotes"
+                                onclick="showReleaseNotesTab()">
+                            Show Release Notes
+                        </button>
 
-              <div class="" id="reportsSection">
-                <p class="tab-content">Reports</p>
-              </div>
+                        <button class="nav-item nav-link shadow"
+                                id="reports"
+                                onclick="reportsSectionTab()">
+                            Reports
+                        </button>
 
-              <div class="" id="syncDataSection">
-                <p class="tab-content">Sync data</p>
-              </div>
+                        <button class="nav-item nav-link shadow"
+                                id="syncData"
+                                onclick="syncDataTab()">
+                            Sync Data
+                        </button>
+                    </ul>
+
+                    <div class="tabs-container col-10">
+                        <div class="m-5" id="imageSection">
+                            <label for="imageInput" style="font-weight: bold">Image Version:</label>
+                            <input class="shadow" type="search" name="name" placeholder="Enter Image Version(YYYY.MM.DD) and Hit Enter" id="imageInput"  style="border-radius: 6px; border-left: 10px solid #0d2436; width: 340px;" onblur="validateDateFormat()" />
+                            <div class="d-none" id="spinner">
+                                <div class="d-flex justify-content-center">
+                                    <div class="spinner-border" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="search-results mt-4" id="searchResults"></div>
+                        </div>
+
+                        <div class="" id="compareBuildsSection">
+                            <p class="tab-content">compareBuilds</p>
+                        </div>
+
+                        <div class="" id="releaseNotesSection">
+                            <p class="tab-content">Release Notes</p>
+                        </div>
+
+                        <div class="" id="reportsSection">
+                            <p class="tab-content">Reports</p>
+                        </div>
+
+                        <div class="" id="syncDataSection">
+                            <p class="tab-content">Sync data</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-      <div class="page-footer"></div>
+        <div class="page-footer"></div>
     </div>
     <script type="text/javascript" src="script.js"></script>
-  </body>
+    <footer>
+        <link rel="stylesheet" href="https://www.jquery-az.com/jquery/style.css">
+        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="https://www.jquery-az.com/jquery/alert/jAlert-v3.min.js"></script>
+        <link rel="stylesheet" href=" https://www.jquery-az.com/jquery/alert/jAlert-v3.css" />
+        <script rel="stylesheet" href="https://www.jquery-az.com/jquery/demo.php?ex=22.0_2"></script>
+    </footer>
+</body>
 </html>
